@@ -14,14 +14,8 @@ app.get('/', async (req,res)=> {
 })
 
 app.post('/',async(req,res) => {
-    try{
         const newUser = await prisma.user.create({data: req.body})
         res.json(newUser)
-    }
-    catch(e){
-        console.log('error', e);
-        throw e;
-    }
 })
 
 
@@ -41,6 +35,7 @@ app.put('/:id', async (req,res)=> {
     res.json(user);
 })
 
+
 app.delete('/:id', async (req,res)=> {
     const id = parseInt(req.params.id);
     const user = await prisma.user.delete({
@@ -49,6 +44,12 @@ app.delete('/:id', async (req,res)=> {
         }
     })
     res.json(user)
+})
+
+app.get('/house/', async (req,res)=> {
+    const id = req.params.id;
+    const data = req.body;
+    const house = prisma.house.create();
 })
 
 app.listen(3002,()=> console.log('hello from port',3002)); 
